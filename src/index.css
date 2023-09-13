@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+h1 {
+    text-align: center;
+    padding: 20px 0 0 0;
+    color: #2B283A;
+    text-align: center;
+    font-family: Karla;
+    font-size: 25.6px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.768px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+p {
+    color: #4A4E74;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13.107px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.393px;
+    margin : 0 80px;
+    
+}
