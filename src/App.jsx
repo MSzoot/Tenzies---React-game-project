@@ -1,37 +1,61 @@
-import { useState } from 'react'; 
+import { useState, useEffect } from 'react'; 
 import { nanoid } from 'nanoid'
 
 import { Dice } from "./components/dice";
 
 export const App = () => {
 
+  const generateNewDie = () => {
+    return {
+      value : Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id : nanoid()
+     }
+  }
 
   const allNewDice = () => {
     let newDice = []
     for (let i = 0 ;i < 10 ; i++ ){
-      newDice.push({
-       value : Math.floor(Math.random() * 6) + 1,
-       isHeld: false,
-       key : nanoid()
-      })
+      newDice.push(generateNewDie())
     }
    return newDice;
   }
-
-
+  
   const rollDice = () => {
-    setDice(allNewDice())
+    setDice(oldDice => oldDice.map(roll =>{
+      return roll.isHeld ? roll
+            : generateNewDie()
+    }))
   }
 
-
-
-  
-    
-  
+  const holdDice = (id) => {
+    setDice(oldDice =>oldDice.map(roll => {
+      return roll.id === id ? {...roll, isHeld : !roll.isHeld} 
+            : roll 
+    }))
+  }
   const [dice, setDice] = useState(allNewDice());
 
+  const [tenzies, setTenzies] = useState(false)
   
-  const diceElements =  dice.map(roll => <Dice value={roll.value}></Dice>)
+  useEffect(()=>{
+    let arr =  []
+    dice.map(roll => roll.isHeld && arr.push(roll) )
+    if (arr.length == 10){
+      alert("You won")
+    }
+  },[dice])
+
+  
+  const diceElements =  dice.map(roll => (
+  
+  <Dice
+    holdDice={() =>holdDice(roll.id)}
+    isHeld={roll.isHeld}
+    value={roll.value}
+    key={roll.id}
+   />
+  ))
   
 
  return <main className=" bg-gray-100 h-[400px] w-[500px] mx-auto rounded-md flex flex-col items-center ">
