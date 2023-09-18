@@ -38,24 +38,42 @@ export const App = () => {
 
   const [tenzies, setTenzies] = useState(false)
   
-  useEffect(()=>{
-    let arr =  []
-    dice.map(roll => roll.isHeld && arr.push(roll) )
-    if (arr.length == 10){
-      alert("You won")
-    }
-  },[dice])
+useEffect(()=>{
+ const isHeld = dice.every(roll => roll.isHeld)
+ const firstValue = dice[0].value
+ const hasSameValue = dice.every(roll => roll.value === firstValue)
+  if(isHeld && hasSameValue){
+    setTenzies(true)
+  }
+},[dice])
+
+
+
+  // useEffect(()=>{
+  //   let arr =[]
+  //   let arr2 = []
+  //   dice.map(roll => roll.isHeld && arr.push(roll) )
+  //   if(arr.length === 10 ) {
+  //     for(let i = 0 ; i < 9 ; i++){
+  //       if (arr[i].value === arr[i+1].value){
+  //         arr2.push(arr[i])
+  //       }
+  //     }
+  //   }
+  //   if(arr2.length === 9){
+  //     setTenzies(true)  
+  //   }
+  // },[dice, tenzies])
 
   
   const diceElements =  dice.map(roll => (
-  
-  <Dice
-    holdDice={() =>holdDice(roll.id)}
-    isHeld={roll.isHeld}
-    value={roll.value}
-    key={roll.id}
-   />
-  ))
+     <Dice
+        holdDice={() =>holdDice(roll.id)}
+        isHeld={roll.isHeld}
+        value={roll.value}
+        key={roll.id}
+        />
+       ))
   
 
  return <main className=" bg-gray-100 h-[400px] w-[500px] mx-auto rounded-md flex flex-col items-center ">
