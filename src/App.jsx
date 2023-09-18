@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'; 
 import { nanoid } from 'nanoid'
+import Confetti from 'react-confetti'
 
 import { Dice } from "./components/dice";
 
@@ -64,6 +65,10 @@ useEffect(()=>{
   //     setTenzies(true)  
   //   }
   // },[dice, tenzies])
+const reset = () =>{
+  setDice(allNewDice)
+  setTenzies(false)
+}
 
   
   const diceElements =  dice.map(roll => (
@@ -84,6 +89,7 @@ useEffect(()=>{
     {diceElements}
     </div>
     </div>
-    <button onClick={rollDice} className=' w-24 h-9 bg-[#5035FF] text-white rounded-sm text-xl'>Roll</button>
+    <button onClick={tenzies ? reset : rollDice } className='px-4 h-9 bg-[#5035FF] text-white rounded-sm text-xl'>{tenzies ? "New Game" : "Roll"}</button>
+    {tenzies && <Confetti/>}
   </main>
 };
