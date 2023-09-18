@@ -27,6 +27,7 @@ export const App = () => {
       return roll.isHeld ? roll
             : generateNewDie()
     }))
+    setRolls(old => old+1)
   }
 
   const holdDice = (id) => {
@@ -38,6 +39,8 @@ export const App = () => {
   const [dice, setDice] = useState(allNewDice());
 
   const [tenzies, setTenzies] = useState(false)
+
+  const [rolls,setRolls] = useState(0)
   
 useEffect(()=>{
  const isHeld = dice.every(roll => roll.isHeld)
@@ -45,29 +48,15 @@ useEffect(()=>{
  const hasSameValue = dice.every(roll => roll.value === firstValue)
   if(isHeld && hasSameValue){
     setTenzies(true)
+    localStorage.setItem("best",rolls)
   }
 },[dice])
 
 
-
-  // useEffect(()=>{
-  //   let arr =[]
-  //   let arr2 = []
-  //   dice.map(roll => roll.isHeld && arr.push(roll) )
-  //   if(arr.length === 10 ) {
-  //     for(let i = 0 ; i < 9 ; i++){
-  //       if (arr[i].value === arr[i+1].value){
-  //         arr2.push(arr[i])
-  //       }
-  //     }
-  //   }
-  //   if(arr2.length === 9){
-  //     setTenzies(true)  
-  //   }
-  // },[dice, tenzies])
 const reset = () =>{
   setDice(allNewDice)
   setTenzies(false)
+  setRolls(0)
 }
 
   
@@ -89,7 +78,13 @@ const reset = () =>{
     {diceElements}
     </div>
     </div>
-    <button onClick={tenzies ? reset : rollDice } className='px-4 h-9 bg-[#5035FF] text-white rounded-sm text-xl'>{tenzies ? "New Game" : "Roll"}</button>
+    <div className='flex justify-center items-center gap-10'>
+    <h1>{"Rolls: "}{rolls}</h1>
+    <button onClick={tenzies ? reset : rollDice } className='w-[150px] h-9 bg-[#5035FF] text-white rounded-sm text-xl'>{tenzies ? "New Game" : "Roll"}</button>
     {tenzies && <Confetti/>}
+    <h1>{"Best: "}{localStorage.getItem("best")}</h1>
+
+    </div>
+    
   </main>
 };
