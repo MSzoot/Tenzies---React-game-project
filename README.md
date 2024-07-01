@@ -1,41 +1,14 @@
-## React + Vite + TailwindCSS template
+## Tenzies Game in React JS
+[tenziesgamemsms.netlify.app](https://tenziesgamemsms.netlify.app)
 
-Create your own project based on this template by running:
+The Tenzies Game in React JS is a simple web application based on the popular dice game Tenzies. Players aim to roll dice to match a target number as quickly as possible. The app features a roll counter to track the number of rolls taken and displays the best score achieved.
 
-```bash
-npx degit quavedev/react-vite-tailwindcss-template your-project
-```
+### Features
+- **Roll Counter**: Tracks the number of dice rolls taken to achieve the target number.
+- **Best Score**: Records and displays the lowest number of rolls achieved in a game session.
+- **Interactive Dice Rolling**: Players can roll dice and see results in real-time.
+- **Responsive Design**: Ensures usability across different devices for seamless gameplay.
 
-## Install
-
-```bash
-npm install
-```
-
-> You can make sure you are running Node.js 18 with `nvm`. Run `nvm use` to set the Node.js 18 in this project.
-
-## Develop
-
-```bash
-npm run dev
-```
-
-## Build
-
-```bash
-npm build
-```
-
-Preview:
-
-```bash
-npm run preview
-```
-
-## Deploy on zCloud
-
-Create your account at [zcloud.ws](https://zcloud.ws).
-
-Connect to your GitHub, create your app and done!
-
-Push to Deploy.
+### Technologies Used
+- **React**: Front-end library for building interactive user interfaces.
+- **CSS**: Custom styling for a visually appealing and responsive design.
